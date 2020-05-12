@@ -1,0 +1,30 @@
+{
+  "name": "turtleone",
+  "version": "1.0.0",
+  "description": "WordPress Theme for https://www.latortuefacile.fr/",
+  "main": "index.js",
+  "scripts": {
+    "watch": "gulp watch",
+    "prettier": "prettier"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggasnier/turtleone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ggasnier/turtleone/issues"
+  },
+  "homepage": "https://github.com/ggasnier/turtleone#readme",
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.14.0",
+    "autoprefixer": "^9.7.6",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.1.0",
+    "prettier": "^2.0.5"
+  }
+}

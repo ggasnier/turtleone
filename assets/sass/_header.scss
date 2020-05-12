@@ -1,0 +1,181 @@
+.header {
+  background-color: $green;
+}
+
+.header-wrapper {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+.header-logo {
+  height: 6rem;
+  display: flex;
+  line-height: 4rem;
+  padding: 1rem 0;
+  text-decoration: none;
+  margin-left: 2rem;
+
+  img {
+    height: 4rem;
+    margin: 0 auto;
+  }
+
+  span {
+    margin-left: 1rem;
+    color: $blanc;
+    font-size: 2.4rem;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    display: block;
+  }
+}
+
+.header-menu {
+  @media screen and (min-width: 768px) {
+    margin-left: auto;
+  }
+
+  .header-menu-hamburger {
+    width: 6rem;
+    height: 6rem;
+    position: absolute;
+    line-height: 6rem;
+    text-decoration: none;
+    color: $blanc;
+    text-align: center;
+    padding: 2rem;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .header-menu-items {
+    list-style: none;
+    display: none;
+    background-color: $dark;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+
+    &.show-modal {
+      display: flex;
+      position: absolute;
+      top: 6rem;
+      left: 0;
+      right: 0;
+    }
+
+    @media screen and (min-width: 768px) {
+      display: flex;
+      flex-direction: row;
+      background-color: $green;
+      position: relative;
+    }
+
+    .menu-item {
+      line-height: 6rem;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.17);
+      }
+
+      a {
+        color: $blanc;
+        text-decoration: none;
+        display: block;
+        padding: 0 2rem;
+      }
+    }
+
+    .menu-item-has-children {
+      .ancestor-wrapper {
+        display: flex;
+
+        a:first-child {
+          flex: 1;
+        }
+
+        .sub-menu-toggle {
+          padding: 2rem;
+          height: 6rem;
+          color: $blanc;
+          cursor: pointer;
+
+          @media screen and (min-width: 768px) {
+            display: none;
+          }
+        }
+      }
+
+      .sub-menu {
+        list-style: none;
+        display: none;
+        margin: 0;
+        margin-left: -4rem;
+
+        &.show-modal {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      @media screen and (min-width: 768px) {
+        &:hover {
+          .sub-menu {
+            position: absolute;
+            display: flex;
+            background-color: $green;
+            flex-direction: column;
+            margin-left: 0;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    .menu-item-search {
+      //background-color: pink;
+
+      .search-form {
+        padding: 1rem;
+        display: flex;
+
+        .search-text {
+          height: 4rem;
+          outline: none;
+          border: none;
+          padding: 1rem;
+          background: rgba(0, 0, 0, 0.17);
+          color: #fff;
+          transition: all 0.2s ease;
+
+          &::placeholder {
+            color: #fff;
+          }
+
+          &:focus {
+          }
+        }
+
+        button {
+          width: 4rem;
+          height: 4rem;
+          border: none;
+          color: $blanc;
+          background: #567B2D;
+          cursor: pointer;
+
+          &:focus {
+            border: none;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
