@@ -18,25 +18,30 @@
 
   <header class="header">
     <div class="header-wrapper">
-      <a href="<?php echo home_url( '/' ); ?>" class="header-logo">
+      <a href="<?php echo home_url('/'); ?>" class="header-logo">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.svg" alt="La Totrue Facile">
         <span>La Tortue Facile</span>
       </a>
 <div class="header-menu">
   <div class="header-menu-hamburger"><span class="dashicons dashicons-menu-alt"></span></div>
       
-      <?php wp_nav_menu(array(
+      <?php wp_nav_menu([
         'menu_class' => 'header-menu-items',
         'menu_id' => 'menu',
         'container' => '',
-        'theme_location' => 'primary'
-      )); ?>
+        'theme_location' => 'primary',
+      ]); ?>
 </div>
-<div class="header-search">
-      <!--<a href="#" class="toggle toggle-search"><span class="dashicons dashicons-search"></span></a>-->
-    </div>
     </div>
   </header>
 
+
 <main class="main">
   <div class="main-wrapper">
+
+  <?php if (function_exists('yoast_breadcrumb')) {
+    if (!is_home() && !is_front_page() && !is_search()) {
+      yoast_breadcrumb('<p class="breadcrumbs">', '</p>');
+    }
+  }
+?>
