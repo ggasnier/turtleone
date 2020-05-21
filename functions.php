@@ -1,6 +1,6 @@
 <?php
 
-function starter_theme_theme_support()
+function turtleone_theme_support()
 {
   add_theme_support('automatic-feed-links');
 
@@ -29,31 +29,31 @@ function starter_theme_theme_support()
    * Make theme available for translation.
    * Translations can be filed in the /languages/ directory.
    * If you're building a theme based on Twenty Twenty, use a find and replace
-   * to change 'starter_theme' to the name of your theme in all the template files.
+   * to change 'turtleone' to the name of your theme in all the template files.
    */
-  load_theme_textdomain('starter_theme');
+  load_theme_textdomain('turtleone');
 
   // Add support for full and wide align images.
   add_theme_support('align-wide');
 }
 
-add_action('after_setup_theme', 'starter_theme_theme_support');
+add_action('after_setup_theme', 'turtleone_theme_support');
 
-function starter_theme_register_styles()
+function turtleone_register_styles()
 {
   $theme_version = wp_get_theme()->get('Version');
 
   wp_enqueue_style(
-    'starter_theme-style',
+    'turtleone-style',
     get_template_directory_uri() . '/assets/css/style.css',
     array(),
     $theme_version
   );
 }
 
-add_action('wp_enqueue_scripts', 'starter_theme_register_styles');
+add_action('wp_enqueue_scripts', 'turtleone_register_styles');
 
-function starter_theme_register_scripts()
+function turtleone_register_scripts()
 {
   $theme_version = wp_get_theme()->get('Version');
 
@@ -67,27 +67,27 @@ function starter_theme_register_scripts()
   }
 
   wp_enqueue_script(
-    'starter_theme-js',
+    'turtleone-js',
     get_template_directory_uri() . '/assets/js/navigation.js',
     array(),
     $theme_version,
     true
   );
-  wp_script_add_data('starter_theme-js', 'async', true);
+  wp_script_add_data('turtleone-js', 'async', true);
 }
 
-add_action('wp_enqueue_scripts', 'starter_theme_register_scripts');
+add_action('wp_enqueue_scripts', 'turtleone_register_scripts');
 
-function starter_theme_menus()
+function turtleone_menus()
 {
   $locations = array(
-    'primary' => __('Menu principal', 'starter_theme')
+    'primary' => __('Menu principal', 'turtleone')
   );
 
   register_nav_menus($locations);
 }
 
-add_action('init', 'starter_theme_menus');
+add_action('init', 'turtleone_menus');
 
 function wpc_dashicons() { 
 	wp_enqueue_style('dashicons');
@@ -103,7 +103,7 @@ add_action('wp_enqueue_scripts', 'wpc_dashicons');
  *
  * @return stdClass $args An object of wp_nav_menu() arguments.
  */
-function starter_theme_add_sub_toggles_to_main_menu( $args, $item, $depth ) {
+function turtleone_add_sub_toggles_to_main_menu( $args, $item, $depth ) {
 
 	// Add sub menu toggles to the Expanded Menu with toggles.
 	/*if ( isset( $args->show_toggles ) && $args->show_toggles ) {
@@ -116,10 +116,10 @@ function starter_theme_add_sub_toggles_to_main_menu( $args, $item, $depth ) {
 		/*if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
 
 			$toggle_target_string = '.menu-modal .menu-item-' . $item->ID . ' > .sub-menu';
-			$toggle_duration      = starter_theme_toggle_duration();
+			$toggle_duration      = turtleone_toggle_duration();
 
 			// Add the sub menu toggle.
-			$args->after .= '<button class="toggle sub-menu-toggle fill-children-current-color" data-toggle-target="' . $toggle_target_string . '" data-toggle-type="slidetoggle" data-toggle-duration="' . absint( $toggle_duration ) . '" aria-expanded="false"><span class="screen-reader-text">' . __( 'Show sub menu', 'starter_theme' ) . '</span>' . starter_theme_get_theme_svg( 'chevron-down' ) . '</button>';
+			$args->after .= '<button class="toggle sub-menu-toggle fill-children-current-color" data-toggle-target="' . $toggle_target_string . '" data-toggle-type="slidetoggle" data-toggle-duration="' . absint( $toggle_duration ) . '" aria-expanded="false"><span class="screen-reader-text">' . __( 'Show sub menu', 'turtleone' ) . '</span>' . turtleone_get_theme_svg( 'chevron-down' ) . '</button>';
 
 		}*/
 
@@ -141,7 +141,7 @@ function starter_theme_add_sub_toggles_to_main_menu( $args, $item, $depth ) {
 	return $args;
 }
 
-add_filter( 'nav_menu_item_args', 'starter_theme_add_sub_toggles_to_main_menu', 10, 3 );
+add_filter( 'nav_menu_item_args', 'turtleone_add_sub_toggles_to_main_menu', 10, 3 );
 
 function add_search_form($items, $args)
 {
