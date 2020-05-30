@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/ggasnier/turtleone#readme",
   "devDependencies": {
-    "@prettier/plugin-php": "^0.14.0",
+    "@prettier/plugin-php": "^0.14.2",
     "autoprefixer": "^9.7.6",
     "cssnano": "^4.1.10",
     "gulp": "^4.0.2",

@@ -17,6 +17,9 @@ while (have_posts()):
 endwhile;
 
 the_posts_navigation();
-else:get_template_part('template-parts/content', 'none');endif; ?>
+else:?>
+ <h1>Aucun résultat pour : <em><?php the_search_query(); ?></em></h1>
+
+<?php endif; ?>
 
 <?php get_footer(); ?>

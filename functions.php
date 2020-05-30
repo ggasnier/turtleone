@@ -15,15 +15,15 @@ function turtleone_theme_support()
 
   add_theme_support('title-tag');
 
-  add_theme_support('html5', array(
+  add_theme_support('html5', [
     'search-form',
     'comment-form',
     'comment-list',
     'gallery',
     'caption',
     'script',
-    'style'
-  ));
+    'style',
+  ]);
 
   /*
    * Make theme available for translation.
@@ -46,7 +46,7 @@ function turtleone_register_styles()
   wp_enqueue_style(
     'turtleone-style',
     get_template_directory_uri() . '/assets/css/style.css',
-    array(),
+    [],
     $theme_version
   );
 }
@@ -69,7 +69,7 @@ function turtleone_register_scripts()
   wp_enqueue_script(
     'turtleone-js',
     get_template_directory_uri() . '/assets/js/navigation.js',
-    array(),
+    [],
     $theme_version,
     true
   );
@@ -80,17 +80,18 @@ add_action('wp_enqueue_scripts', 'turtleone_register_scripts');
 
 function turtleone_menus()
 {
-  $locations = array(
-    'primary' => __('Menu principal', 'turtleone')
-  );
+  $locations = [
+    'primary' => __('Menu principal', 'turtleone'),
+  ];
 
   register_nav_menus($locations);
 }
 
 add_action('init', 'turtleone_menus');
 
-function wpc_dashicons() { 
-	wp_enqueue_style('dashicons');
+function wpc_dashicons()
+{
+  wp_enqueue_style('dashicons');
 }
 add_action('wp_enqueue_scripts', 'wpc_dashicons');
 
@@ -103,17 +104,17 @@ add_action('wp_enqueue_scripts', 'wpc_dashicons');
  *
  * @return stdClass $args An object of wp_nav_menu() arguments.
  */
-function turtleone_add_sub_toggles_to_main_menu( $args, $item, $depth ) {
-
-	// Add sub menu toggles to the Expanded Menu with toggles.
-	/*if ( isset( $args->show_toggles ) && $args->show_toggles ) {
+function turtleone_add_sub_toggles_to_main_menu($args, $item, $depth)
+{
+  // Add sub menu toggles to the Expanded Menu with toggles.
+  /*if ( isset( $args->show_toggles ) && $args->show_toggles ) {
 
 		//Wrap the menu item link contents in a div, used for positioning.*/
-		//$args->before = '<div class="ancestor-wrapper">';
-		//$args->after  = '';
+  //$args->before = '<div class="ancestor-wrapper">';
+  //$args->after  = '';
 
-		// Add a toggle to items with children.
-		/*if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
+  // Add a toggle to items with children.
+  /*if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
 
 			$toggle_target_string = '.menu-modal .menu-item-' . $item->ID . ' > .sub-menu';
 			$toggle_duration      = turtleone_toggle_duration();
@@ -123,25 +124,31 @@ function turtleone_add_sub_toggles_to_main_menu( $args, $item, $depth ) {
 
 		}*/
 
-		// Close the wrapper.
-		//$args->after .= '</div><!-- .ancestor-wrapper -->';
+  // Close the wrapper.
+  //$args->after .= '</div><!-- .ancestor-wrapper -->';
 
-		// Add sub menu icons to the primary menu without toggles.
+  // Add sub menu icons to the primary menu without toggles.
   //} elseif ( 'primary' === $args->theme_location ) {*/
-    
-		if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
-      $args->before = '<div class="ancestor-wrapper">';
-			$args->after = '<div class="sub-menu-toggle"><span class="dashicons dashicons-arrow-down-alt2"></span></div></div>';
-		} else {
-      $args->before = '';
-			$args->after = '';
-		}
-	//}
 
-	return $args;
+  if (in_array('menu-item-has-children', $item->classes, true)) {
+    $args->before = '<div class="ancestor-wrapper">';
+    $args->after =
+      '<div class="sub-menu-toggle"><span class="dashicons dashicons-arrow-down-alt2"></span></div></div>';
+  } else {
+    $args->before = '';
+    $args->after = '';
+  }
+  //}
+
+  return $args;
 }
 
-add_filter( 'nav_menu_item_args', 'turtleone_add_sub_toggles_to_main_menu', 10, 3 );
+add_filter(
+  'nav_menu_item_args',
+  'turtleone_add_sub_toggles_to_main_menu',
+  10,
+  3
+);
 
 function add_search_form($items, $args)
 {
@@ -150,7 +157,7 @@ function add_search_form($items, $args)
       '<li id="menu-item-search" class="menu-item-search">
         <form role="search" method="get" class="search-form" action="/">
           <input type="search" class="search-text" value="' .
-          get_search_query() .
+      get_search_query() .
       '" name="s" placeholder="Recherche" autocomplete="off" /><button type="submit"><span class="dashicons dashicons-search"></span></button>
         </form>
       </li>';
@@ -163,47 +170,95 @@ add_filter('wp_nav_menu_items', 'add_search_form', 10, 2);
 /**
  * Disable the emoji's
  */
-function disable_emojis() {
-  remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-  remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-  remove_action( 'wp_print_styles', 'print_emoji_styles' );
-  remove_action( 'admin_print_styles', 'print_emoji_styles' ); 
-  remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-  remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); 
-  remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-  add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
-  add_filter( 'wp_resource_hints', 'disable_emojis_remove_dns_prefetch', 10, 2 );
- }
- add_action( 'init', 'disable_emojis' );
+function disable_emojis()
+{
+  remove_action('wp_head', 'print_emoji_detection_script', 7);
+  remove_action('admin_print_scripts', 'print_emoji_detection_script');
+  remove_action('wp_print_styles', 'print_emoji_styles');
+  remove_action('admin_print_styles', 'print_emoji_styles');
+  remove_filter('the_content_feed', 'wp_staticize_emoji');
+  remove_filter('comment_text_rss', 'wp_staticize_emoji');
+  remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+  add_filter('tiny_mce_plugins', 'disable_emojis_tinymce');
+  add_filter('wp_resource_hints', 'disable_emojis_remove_dns_prefetch', 10, 2);
+}
+add_action('init', 'disable_emojis');
 
- /**
+/**
  * Filter function used to remove the tinymce emoji plugin.
- * 
- * @param array $plugins 
+ *
+ * @param array $plugins
  * @return array Difference betwen the two arrays
  */
-function disable_emojis_tinymce( $plugins ) {
-  if ( is_array( $plugins ) ) {
-  return array_diff( $plugins, array( 'wpemoji' ) );
+function disable_emojis_tinymce($plugins)
+{
+  if (is_array($plugins)) {
+    return array_diff($plugins, ['wpemoji']);
   } else {
-  return array();
+    return [];
   }
- }
- 
- /**
-  * Remove emoji CDN hostname from DNS prefetching hints.
-  *
-  * @param array $urls URLs to print for resource hints.
-  * @param string $relation_type The relation type the URLs are printed for.
-  * @return array Difference betwen the two arrays.
-  */
- function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
-  if ( 'dns-prefetch' == $relation_type ) {
-  /** This filter is documented in wp-includes/formatting.php */
-  $emoji_svg_url = apply_filters( 'emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/' );
- 
- $urls = array_diff( $urls, array( $emoji_svg_url ) );
+}
+
+/**
+ * Remove emoji CDN hostname from DNS prefetching hints.
+ *
+ * @param array $urls URLs to print for resource hints.
+ * @param string $relation_type The relation type the URLs are printed for.
+ * @return array Difference betwen the two arrays.
+ */
+function disable_emojis_remove_dns_prefetch($urls, $relation_type)
+{
+  if ('dns-prefetch' == $relation_type) {
+    /** This filter is documented in wp-includes/formatting.php */
+    $emoji_svg_url = apply_filters(
+      'emoji_svg_url',
+      'https://s.w.org/images/core/emoji/2/svg/'
+    );
+
+    $urls = array_diff($urls, [$emoji_svg_url]);
   }
- 
- return $urls;
- }
+
+  return $urls;
+}
+
+function sous_pages()
+{
+  global $post;
+
+  $args = [
+    'post_type' => 'page',
+    'posts_per_page' => -1,
+    'post_parent' => $post->ID,
+    'order' => 'ASC',
+    'orderby' => 'menu_order',
+  ];
+
+  $parent = new WP_Query($args);
+
+  $output = '';
+
+  if ($parent->have_posts()):
+    while ($parent->have_posts()):
+      $parent->the_post();
+
+      //$output .= get_the_ID();
+      //$output .= get_the_title();
+      //$output .= get_the_permalink();
+
+      $output .=
+        '<h2><a href="' .
+        get_the_permalink() .
+        '">' .
+        get_the_title() .
+        '</a></h2>';
+
+      $output .= '<p>' . get_the_excerpt() . '</p>';
+    endwhile;
+  endif;
+  wp_reset_postdata();
+  return $output;
+}
+add_shortcode('sous_pages', 'sous_pages');
+
+// Adding excerpt for page
+add_post_type_support('page', 'excerpt');
